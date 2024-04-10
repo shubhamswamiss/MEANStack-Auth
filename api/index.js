@@ -19,7 +19,7 @@ app.use('/api/role',roleRoute);
 //     return res.send('<h1>Hello, Welcome to MEAN Stack Project</h1>');
 // })
 
-// DB Connection
+//DB Connection
 const connectMongoDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
