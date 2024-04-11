@@ -43,7 +43,7 @@ export const createRole = async (req,res,next)=>{
  }
 
 export const deleteRole = async(req,res,next)=>{
-    try{
+    try{ 
        const roleId = req.params.id;
        const role = await Role.findById({_id:roleId});
        if(role){

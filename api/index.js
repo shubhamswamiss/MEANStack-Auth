@@ -2,11 +2,13 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import roleRoute from './routes/role.js';
+import authRoute from './routes/auth.js';
 const app = express();
 dotenv.config(); 
 
 app.use(express.json());
 app.use('/api/role',roleRoute);
+app.use('/api/auth',authRoute);
 // app.use('/',(req,res)=>{
 //   return res.send("<h1>Hello, Welcome to MEAN Stack Project</h1>");
 // })
@@ -28,7 +30,6 @@ const connectMongoDB = async () => {
     throw error;
   }
 };
-
 
 
 app.listen(8080, () => {
