@@ -9,6 +9,15 @@ dotenv.config();
 app.use(express.json());
 app.use('/api/role',roleRoute);
 app.use('/api/auth',authRoute);
+
+//Error Handler Middleware
+
+app.use((err,req,res,next)=>{
+  
+
+})
+
+
 // app.use('/',(req,res)=>{
 //   return res.send("<h1>Hello, Welcome to MEAN Stack Project</h1>");
 // })
@@ -32,7 +41,7 @@ const connectMongoDB = async () => {
 };
 
 
-app.listen(8080, () => {
+app.listen(3000, () => {
   connectMongoDB();
   console.log("Connected to backend!");
 });
