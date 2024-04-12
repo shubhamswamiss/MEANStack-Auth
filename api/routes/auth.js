@@ -1,5 +1,5 @@
 import express from 'express';
-import { register,getUsers,login } from '../controllers/auth.controller.js';
+import { register,getUsers,login,registerAdmin } from '../controllers/auth.controller.js';
 
 const router = express.Router();
 
@@ -11,5 +11,8 @@ router.get('/getusers',getUsers);
 
 //Login
 router.post('/login',login);
+
+//register as Admin
+router.post('/register-admin',registerAdmin);
 
 export default router;
