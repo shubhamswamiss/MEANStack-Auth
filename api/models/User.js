@@ -35,14 +35,12 @@ const UserSchema = mongoose.Schema(
         },
         roles: {
             type: [Schema.Types.ObjectId],
-            required: true,
-            ref:'Role'
+            ref:'Role',
+            required: true
         }
     },
     {
-         timestamps: {
-            currentTime: () => new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"})
-        }
+         timestamps: true
     }
 );
 
