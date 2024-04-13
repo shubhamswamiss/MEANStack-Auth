@@ -8,9 +8,7 @@ const RoleSchema = mongoose.Schema(
         }
     },
     {
-        timestamps: {
-            currentTime: () => new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"})
-        }
+        timestamps:true
        
     }
 );
