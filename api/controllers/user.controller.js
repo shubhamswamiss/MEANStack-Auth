@@ -1,5 +1,6 @@
 import { CreateError } from "../utils/error.js"
 import { CreateSuccess } from "../utils/success.js";
+import User from "../models/User.js";
 
 export const getAllUsers = async (req,res,next)=>{
     try {
