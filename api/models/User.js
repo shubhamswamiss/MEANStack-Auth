@@ -31,7 +31,7 @@ const UserSchema = mongoose.Schema(
         },
         isAdmin: {
             type: Boolean,
-            default: true
+            default: false
         },
         roles: {
             type: [Schema.Types.ObjectId],
