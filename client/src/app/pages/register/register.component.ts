@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { confirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -19,7 +20,10 @@ export default class RegisterComponent implements OnInit {
       username: ['',Validators.required],
       password: ['',Validators.required],
       confirmPassword: ['',Validators.required]
-     });
+     },
+    {
+      validator: confirmPasswordValidator('password','confirmPassword')
+    });
   }
 
   register(){
