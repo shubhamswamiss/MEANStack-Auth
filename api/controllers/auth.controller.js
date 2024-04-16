@@ -19,6 +19,16 @@ export const register = async (req, res, next) => {
       roles: role,
       
     });
+    const uniqueUser = await User.findOne({ username:req.body.userName })
+    const uniqueEmail = await User.findOne({ email:req.body.email});
+    if(uniqueEmail){
+      console.log(uniqueEmail);
+      return next(CreateError(400, "Email is already exists!"));
+    }
+    if(uniqueUser){
+      console.log(uniqueUser);
+     return next(CreateError(400, "Username must be unique!"));
+    }
     await newUser.save();
     return next(CreateSuccess(200, "User Registered Successfully!"));
   } catch (error) {
@@ -34,12 +44,17 @@ export const registerAdmin = async (req, res, next) => {
      const newUser = new User({
        firstName: req.body.firstName,
        lastName: req.body.lastName,
-       username: req.body.username,
+       username: req.body.userName,
        email: req.body.email,
        password: hashPassword,
        isAdmin: true,
        roles: role,
      });
+
+     const uniqueUser = await User.findOne({ username:req.body.userName })
+     if(uniqueUser){
+      return next(CreateError(400, "Username must be unique."))
+     }
      await newUser.save();
      return next(CreateSuccess(200, "Admin Registered Successfully!"));
    } catch (error) {

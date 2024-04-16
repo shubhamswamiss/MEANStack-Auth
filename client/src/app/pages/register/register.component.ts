@@ -41,6 +41,7 @@ export default class RegisterComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
+        alert(err.error.message);
       }
      })
   }
