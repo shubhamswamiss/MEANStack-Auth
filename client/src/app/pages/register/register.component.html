@@ -28,9 +28,9 @@
            <span *ngIf="registerForm.hasError('confirmPasswordValidator','confirmPassword')"
            class="text-red-500">#Passowrd didn't matched!</span> 
         </div>   
-        <button (click)="register()" [disabled]="registerForm.invalid"  [class.disabled]="registerForm.invalid" class="bg-indigo-500 p-1.5 rounded mt-3 text-white">Submit</button>
+        <button (click)="register()" [disabled]="registerForm.invalid"  [class.disabled]="registerForm.invalid" class="bg-indigo-500 p-1.5 rounded mt-3 text-white">Register</button>
    </form>
     <div class="flex justify-center mt-4">
-        <span>Already Have Account</span> <a class="text-indigo-600 ml-2 cursor-pointer">Login Here</a>
+        <span>Already Have Account</span> <a routerLink="/login" class="text-indigo-600 ml-2 cursor-pointer">Login Here</a>
     </div>
 </div>    
