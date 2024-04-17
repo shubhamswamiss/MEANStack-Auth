@@ -5,4 +5,6 @@ export const routes: Routes = [
     { path:'register', loadComponent: () => import('./pages/register/register.component')},
     { path:'forgetpassword', loadComponent: () => import('./pages/forget-password/forget-password.component')},
     { path:'home', loadComponent: () => import('./pages/home/home.component')},
+    { path:'reset/:token', loadComponent: () => import('./pages/reset/reset.component')},
+
 ];
