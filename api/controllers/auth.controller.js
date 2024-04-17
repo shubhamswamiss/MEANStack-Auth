@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
 import { CreateSuccess } from "../utils/success.js";
 import { CreateError } from "../utils/error.js";
+import UserToken from "../models/UserToken.js";
 
 export const register = async (req, res, next) => {
   try {
@@ -100,3 +101,23 @@ export const login = async (req, res, next) => {
     return next(CreateError(500, "Something went wrong!"));
   }
 };
+
+export const sendEmail = async (req, res, next) => {
+    const email = req.body.email;
+    const user = await  User.findOne({email: {$regex: "^"+email+'$', $options:'i' }});
+    if(!user){
+      return next(CreateError(400, "User not found to reset the email"));
+    }
+    const payload = {
+      email: req.body.email
+    }
+    const expirytime = 300;
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn:expirytime});
+
+    const newToken = new UserToken({
+      userId: user._id,
+      token: token
+    })
+
+    
+}
