@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { CreateSuccess } from "../utils/success.js";
 import { CreateError } from "../utils/error.js";
 import UserToken from "../models/UserToken.js";
+import nodemailer from 'nodemailer';
 
 export const register = async (req, res, next) => {
   try {
@@ -119,13 +120,44 @@ export const sendEmail = async (req, res, next) => {
       token: token
     });
 
-    const mailTranporter = nodemailer.Transport({
-      service: "gmail",
+    const mailTranporter = nodemailer.createTransport({
+      service: "Gmail",
       auth: {
-        user: "",
-        pass: ""
+        user: "shubhamswamiss333@gmail.com",
+        pass: "ubikhsuqztvhwigv"
       }
     });
+    let mailDetails = {
+      from: "shubhamswamiss@gmail.com",
+      to: email,
+      subject: "Reset Password",
+      html: `
+      <html>
+       <head><title>Password Reset Request</title></head>
+        <body>
+           <h1>Password Reset Request</h1>
+           <p>Dear ${user.username},</p>
+           <p>We have receive a request to reset your password for your account with BookMYBook. To complete the password reset process, please click on the button below:</p>
+           <a href=${process.env.LIVE_URL}/reset/${token}><button style="background-color:#4CAF50; color:white; padding:14px 20px; border:none; cursor:pointer; border-radius:4px; ">Reset Password</button></a>
+           <p>Please note that this link is valid for a 5mins. If you did not request a password reset, please disregard this message.</p>
+           <p>Thank you,</p>
+           <p>BookMYBook Team</p>
+        </body>
+      
+      `
+    };
+
+    mailTranporter.sendMail(mailDetails, async (err,data)=>{
+        if(err){
+          console.error(err);
+          return next(CreateError(500, "Something went wrong while sending email"))
+        }else{
+          await newToken.save();
+          return next(CreateSuccess(200, "Email sent Successfully"))
+        }
+    })
+
+
 
     
 }
