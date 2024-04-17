@@ -117,7 +117,15 @@ export const sendEmail = async (req, res, next) => {
     const newToken = new UserToken({
       userId: user._id,
       token: token
-    })
+    });
+
+    const mailTranporter = nodemailer.Transport({
+      service: "gmail",
+      auth: {
+        user: "",
+        pass: ""
+      }
+    });
 
     
 }
