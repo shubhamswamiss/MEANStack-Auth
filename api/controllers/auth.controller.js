@@ -6,7 +6,6 @@ import { CreateSuccess } from "../utils/success.js";
 import { CreateError } from "../utils/error.js";
 import UserToken from "../models/UserToken.js";
 import nodemailer from 'nodemailer';
-import { convertTypeAcquisitionFromJson } from "typescript";
 
 export const register = async (req, res, next) => {
   try {
@@ -163,7 +162,7 @@ export const resetPassword = (req,res,next) => {
     const token = req.body.token;
     const newPassword = req.body.password;
 
-    jwt.verify(token,process.env.JWT_SECRET, async(err,data)=>{
+    jwt.verify(token, process.env.JWT_SECRET, async(err,data)=>{
       if(err){
           return next(CreateError(500,"Reset Link is Expired!"))
       }else{
