@@ -32,6 +32,7 @@ export default class LoginComponent implements OnInit {
     },
     error: (err)=>{
       console.log(err);
+      alert(err.error.message);
     }
    })
  }
